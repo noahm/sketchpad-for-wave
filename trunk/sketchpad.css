@@ -1,0 +1,212 @@
+/* { -moz-box-sizing:border-box; } */
+
+body {
+	font-family:Tahoma;
+	font-size:11px;
+}
+
+#window {
+	width:591px;
+	height:385px;
+}
+
+#workspace {
+	float: left;
+	border: 1px solid black;
+	width: 540px;
+	height: 383px;
+}
+
+#workspace.brush canvas		{ cursor: url(./img/brush_cursor.gif) 8  8, auto; }
+#workspace.line canvas, #workspace.curve canvas, #workspace.rectangle canvas,
+#workspace.ellipse canvas	{ cursor: url(./img/shapes.gif) 9  9, auto; }
+
+
+#canvas, #canvastemp {
+	background-color:white;
+	width:540px;
+	height:383px;
+}
+#canvastemp {
+	background-color:transparent;
+	display:none;
+	positon: relative;
+	top:-386px; /* change this according to the size of the drawing area +3 ? */
+}
+
+#toolbar {
+	width:48px;
+	float:left;
+	border:1px solid;
+	border-left:0;
+}
+#toolbar ul {
+	margin:0;padding:0;
+	list-style:none;
+}
+#toolbar ul li {
+	margin:0;padding:0;
+}
+
+#colorbar {
+	padding: 1px;
+}
+#colorbar ul {
+	margin:0;padding:2px;
+	list-style:none;
+	display: inline-block
+}
+#colorbar ul li {
+	margin:0;
+	padding:0;
+}
+
+#toolbar #buttons li {
+	float:left; margin: 1px;
+	width:20px; height:20px;
+	border:1px solid threeddarkshadow;
+}
+#toolbar #buttons li.down, #toolbar #buttons li.sel {
+	border-color:threedlightshadow;
+}
+#toolbar #buttons li.down img, #toolbar #buttons li.sel img {
+	background-color:threedhighlight;
+	padding-left:1px; padding-top:1px;
+}
+#toolbar #buttons li:hover {
+	border-color: threedshadow;
+}
+#toolbar #buttons:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+#toolbar #settings {
+	padding:2px;
+	border:1px solid threedshadow;
+	margin:1px 3px 3px;
+	height:65px;
+}
+
+#toolbar #settings > div {
+	display:none;
+}
+#toolbar #settings div div {
+	cursor:default;
+	text-align:center;	
+	float:left; width:33%;
+	width:12px; height:12px;
+	margin-bottom:2px;
+}
+#toolbar #settings div .sel {
+	background-color:highlight; color:highlighttext;
+}
+#toolbar #settings div.linecurve div { height:10px; width:auto; float:none; padding-top:1px }
+#toolbar #settings div.linecurve div div { float:none; background-color:black;  margin-left:4px; margin-right:4px; }
+#toolbar #settings div.linecurve div.sel div { background-color:highlighttext; }
+#toolbar #settings div#shape-settings > div { width:24px; height:10px; padding:4px; margin-top:1px; margin-bottom:0; }
+#toolbar #settings div#shape-settings div.sel { background-color:highlight; }
+#toolbar #settings div#shape-settings div div { width:100%; height:100% }
+#toolbar #settings div#shape-settings div.sel div { border-color:highlighttext !important; }
+
+
+#colorbar #colors {
+	width:32px;
+	padding: 2px 8px;
+}
+
+#colorbar #colors li {
+	float:left;
+	height:14px; width:14px;
+}
+
+#colorbar #currcol {
+	border:1px solid threedshadow;
+	float:left; margin: 0 6px;
+	width:30px; height:30px;
+	position:relative;
+}
+
+#colorbar label {
+	margin-left:10px;
+	white-space:nowrap;
+}
+
+#colorbar #colors li div, #currcol #currcoltert {
+	margin:0;
+	float:none;
+	width:12px; height:12px;
+	border:1px solid;
+	border-top-color:windowframe;
+	border-left-color:windowframe;
+	border-right-color:threedlightshadow;
+	border-bottom-color:threedlightshadow;
+}
+#currcol #currcoltert {
+	width:28px; height:28px;
+	background-color:#DDD;
+}
+#currcol div {
+	width:15px; height:15px;
+	box-shadow: 2px 2px 6px #555;
+	-moz-box-shadow: 2px 2px 6px #555;
+	-webkit-box-shadow: 2px 2px 6px #555;
+}
+
+#currcolback {
+	background-color: #ffffff;
+	position: relative;
+	top: 11px;
+	left: 11px;
+}
+
+#currcolfore {
+	background-color: #000000;
+	position: relative;
+	top: -11px;
+	left: 4px;
+}
+
+#overlaybg {
+  display:none;
+  width:100%;
+  height:100%;
+  background-color:#000;
+  opacity:.7;
+  z-index:99;
+}
+#overlay {
+  display:none;
+  z-index:100;
+  background-color:#ccc;
+  padding:1em;
+}
+#overlay img {
+  margin-top:1em;
+  border:1px solid #888;
+}
+
+
+#newest {
+  padding: 1em 0;
+  width:100%;
+  background-color:#06C;
+  /*opacity:.5;*/
+}
+#newest a {
+  color:white !important;
+  /*margin:1em;*/
+  padding:1em;
+}
+#newest a img {
+  border:1px solid transparent;
+}
+#newest a:hover img { 
+  border:1px solid #666;
+}
+#newest:hover {
+  opacity:1;
+}

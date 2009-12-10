@@ -1,0 +1,9 @@
+<extension 
+    name="Sketchpad for Google Wave"
+    description="Simple Real-time Collaborative Drawing"
+    thumbnailUrl="http://www.psoplayer.com/sketchpad/thumbnail.png"> 
+  <author name="Noah Maneschmidt" email="noah@manneschmidt.net" /> 
+  <menuHook location="TOOLBAR" text="Insert a Sketchpad gadget." iconUrl="http://www.psoplayer.com/sketchpad/sketchpad.ico"> 
+    <insertGadget url="http://www.psoplayer.com/sketchpad/sketchpad.xml"/> 
+  </menuHook> 
+</extension> 
