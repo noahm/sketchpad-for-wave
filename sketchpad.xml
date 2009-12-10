@@ -10,9 +10,9 @@
 </ModulePrefs>
 <Content type="html">
 <![CDATA[ 
-	<link rel="stylesheet" type="text/css" href="http://www.psoplayer.com/sketchpad/sketchpad.css" />
+	<link rel="stylesheet" type="text/css" href="http://sketchpad-for-wave.googlecode.com/svn/trunk/sketchpad.css" />
 	<script type="text/javascript" src="http://wave-api.appspot.com/public/wave.js"></script>
-	<script type="text/javascript" src="http://www.psoplayer.com/sketchpad/drawing.js"></script>
+	<script type="text/javascript" src="http://sketchpad-for-wave.googlecode.com/svn/trunk/drawing.js"></script>
 	<script type="text/javascript">
 		function main() {
 			init();
@@ -34,20 +34,20 @@
 		</DIV>
 		<DIV id="toolbar">
 			<UL id="buttons">
-				<LI id="brush" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Brush: Draws using a brush with the selected shape and size."><IMG src="http://www.psoplayer.com/sketchpad/img/brush.gif">		</LI>
-				<LI id="airbrush" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Draws using an airbrush of the selected size."><IMG src="http://www.psoplayer.com/sketchpad/img/airbrush.gif">	</LI>
-				<LI id="line" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Line: Draws a straight line with the selected line width."><IMG src="http://www.psoplayer.com/sketchpad/img/line.gif">		</LI>
-				<LI id="curve" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Curve: Draws a curved line with the selected line width."><IMG src="http://www.psoplayer.com/sketchpad/img/curve.gif">		</LI>
-				<LI id="rectangle" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Rectangle: Draws a rectangle with the selected fill style."><IMG src="http://www.psoplayer.com/sketchpad/img/rectangle.gif">	</LI>
-				<LI id="ellipse" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Ellipse: Draws an ellipse with the selected fill style."><IMG src="http://www.psoplayer.com/sketchpad/img/ellipse.gif">	</LI>
+				<LI id="brush" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Brush: Draws using a brush with the selected shape and size."><IMG src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/brush.gif">		</LI>
+				<LI id="airbrush" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Draws using an airbrush of the selected size."><IMG src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/airbrush.gif">	</LI>
+				<LI id="line" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Line: Draws a straight line with the selected line width."><IMG src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/line.gif">		</LI>
+				<LI id="curve" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Curve: Draws a curved line with the selected line width."><IMG src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/curve.gif">		</LI>
+				<LI id="rectangle" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Rectangle: Draws a rectangle with the selected fill style."><IMG src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/rectangle.gif">	</LI>
+				<LI id="ellipse" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Ellipse: Draws an ellipse with the selected fill style."><IMG src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/ellipse.gif">	</LI>
 			</UL>
 
 			<DIV id="settings" onmousedown="event.preventDefault()">
 
 				<DIV id="brush-settings">
-				<DIV onclick="selSetting(this, &#39;c.lineWidth=8;c.lineCap=\&#39;round\&#39;&#39;)" style="font-size:170%;line-height:11px">•</DIV>
-				<DIV onclick="selSetting(this, &#39;c.lineWidth=5;c.lineCap=\&#39;round\&#39;&#39;)" style="font-size:100%;line-height:10px">•</DIV>
-				<DIV onclick="selSetting(this, &#39;c.lineWidth=1;c.lineCap=\&#39;round\&#39;&#39;)" class="sel" style="font-size:30%;line-height:13px">•</DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=8;c.lineCap=\&#39;round\&#39;&#39;)" style="font-size:170%;line-height:11px"><!--•-->&bull;</DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=5;c.lineCap=\&#39;round\&#39;&#39;)" style="font-size:100%;line-height:10px"><!--•-->&bull;</DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=1;c.lineCap=\&#39;round\&#39;&#39;)" class="sel" style="font-size:30%;line-height:13px"><!--•-->&bull;</DIV>
 				<DIV onclick="selSetting(this, &#39;c.lineWidth=8;c.lineCap=\&#39;square\&#39;&#39;)" style="font-size:160%;line-height:8px">&#9632;</DIV>
 					<DIV onclick="selSetting(this, &#39;c.lineWidth=5;c.lineCap=\&#39;square\&#39;&#39;)" style="font-size:100%;line-height:10px">&#9632;</DIV>
 					<DIV onclick="selSetting(this, &#39;c.lineWidth=2;c.lineCap=\&#39;square\&#39;&#39;)" style="font-size:40%;line-height:13px">&#9632;</DIV>
@@ -60,15 +60,14 @@
 					<DIV onclick="selSetting(this, &#39;c.lineWidth=5&#39;)"><DIV style="height:5px;margin-top:1px"></DIV></DIV>
 				</DIV>
 				<DIV id="shape-settings">
-
 					<DIV onclick="selSetting(this, &#39;c.strokeFill=1&#39;)" class="sel"><DIV style="border:1px solid #000"></DIV></DIV>
 					<DIV onclick="selSetting(this, &#39;c.strokeFill=3&#39;)"><DIV style="border:1px solid #000; background-color:#888"></DIV></DIV>
 					<DIV onclick="selSetting(this, &#39;c.strokeFill=2&#39;)"><DIV style="background-color:#888"></DIV></DIV>
 				</DIV>
 				<DIV id="airbrush-settings" style="padding-top:2px;margin-left:-2px;">
-					<IMG onclick="selSetting(this, &#39;c.lineWidth=1;&#39;)" class="sel" src="http://www.psoplayer.com/sketchpad/img/airbrush_s.gif" width="19" height="19" style="float:left;">
-					<IMG onclick="selSetting(this, &#39;c.lineWidth=2;&#39;)" src="http://www.psoplayer.com/sketchpad/img/airbrush_m.gif" width="19" height="19" style="float:left;"><BR>
-					<IMG onclick="selSetting(this, &#39;c.lineWidth=3;&#39;)" src="http://www.psoplayer.com/sketchpad/img/airbrush_l.gif" width="24" height="24" style="clear:left;margin-top:6px;margin-left:7px;">
+					<IMG onclick="selSetting(this, &#39;c.lineWidth=1;&#39;)" class="sel" src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/airbrush_s.gif" width="19" height="19" style="float:left;">
+					<IMG onclick="selSetting(this, &#39;c.lineWidth=2;&#39;)" src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/airbrush_m.gif" width="19" height="19" style="float:left;"><BR>
+					<IMG onclick="selSetting(this, &#39;c.lineWidth=3;&#39;)" src="http://sketchpad-for-wave.googlecode.com/svn/trunk/img/airbrush_l.gif" width="24" height="24" style="clear:left;margin-top:6px;margin-left:7px;">
 				</DIV>
 
 			</DIV>
