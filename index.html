@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	<TITLE>CanvasPaint</TITLE>
+	
+	<META name="description" content="A clone of Microsoft Paint in JavaScript, using the WHATWG Canvas.">
+
+	<LINK rel="shortcut icon" href="./paint.ico">
+	<LINK rel="stylesheet" type="text/css" href="./paint.css">
+	<SCRIPT type="text/javascript" src="./paint.js"></SCRIPT>
+
+</HEAD>
+<BODY id="body">
+
+<DIV id="window" oncontextmenu="return false">
+	
+	<DIV id="workspace" class="brush">
+		<CANVAS id="canvas" width="540" height="383" oncontextmenu="return false"></CANVAS>
+		<CANVAS id="canvastemp" width="540" height="383" oncontextmenu="return false"></CANVAS>
+	</DIV>
+	<DIV id="toolbar">
+		<UL id="buttons">
+			<LI id="brush" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Brush: Draws using a brush with the selected shape and size."><IMG src="./img/brush.gif">		</LI>
+			<LI id="airbrush" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Draws using an airbrush of the selected size."><IMG src="./img/airbrush.gif">	</LI>
+			<LI id="line" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Line: Draws a straight line with the selected line width."><IMG src="./img/line.gif">		</LI>
+			<LI id="curve" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Curve: Draws a curved line with the selected line width."><IMG src="./img/curve.gif">		</LI>
+			<LI id="rectangle" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Rectangle: Draws a rectangle with the selected fill style."><IMG src="./img/rectangle.gif">	</LI>
+			<LI id="ellipse" onmousedown="buttonDown(event, this)" onclick="selTool(this)" onmouseout="buttonReset(this)" title="Ellipse: Draws an ellipse with the selected fill style."><IMG src="./img/ellipse.gif">	</LI>
+		</UL>
+
+		<DIV id="settings" onmousedown="event.preventDefault()">
+
+			<DIV id="brush-settings">
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=8;c.lineCap=\&#39;round\&#39;&#39;)" style="font-size:170%;line-height:11px">•</DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=5;c.lineCap=\&#39;round\&#39;&#39;)" style="font-size:100%;line-height:10px">•</DIV>
+
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=1;c.lineCap=\&#39;round\&#39;&#39;)" class="sel" style="font-size:30%;line-height:13px">•</DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=8;c.lineCap=\&#39;square\&#39;&#39;)" style="font-size:160%;line-height:8px">&#9632;</DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=5;c.lineCap=\&#39;square\&#39;&#39;)" style="font-size:100%;line-height:10px">&#9632;</DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=2;c.lineCap=\&#39;square\&#39;&#39;)" style="font-size:40%;line-height:13px">&#9632;</DIV>
+			</DIV>
+			<DIV id="line-settings" class="linecurve">
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=1&#39;)" class="sel"><DIV style="height:1px;margin-top:3px"></DIV></DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=2&#39;)"><DIV style="height:2px;margin-top:3px"></DIV></DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=3&#39;)"><DIV style="height:3px;margin-top:2px"></DIV></DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=4&#39;)"><DIV style="height:4px;margin-top:2px"></DIV></DIV>
+				<DIV onclick="selSetting(this, &#39;c.lineWidth=5&#39;)"><DIV style="height:5px;margin-top:1px"></DIV></DIV>
+			</DIV>
+			<DIV id="shape-settings">
+
+				<DIV onclick="selSetting(this, &#39;c.strokeFill=1&#39;)" class="sel"><DIV style="border:1px solid #000"></DIV></DIV>
+				<DIV onclick="selSetting(this, &#39;c.strokeFill=3&#39;)"><DIV style="border:1px solid #000; background-color:#888"></DIV></DIV>
+				<DIV onclick="selSetting(this, &#39;c.strokeFill=2&#39;)"><DIV style="background-color:#888"></DIV></DIV>
+			</DIV>
+			<DIV id="airbrush-settings" style="padding-top:2px;margin-left:-2px;">
+				<IMG onclick="selSetting(this, &#39;c.lineWidth=1;&#39;)" class="sel" src="./img/airbrush_s.gif" width="19" height="19" style="float:left;">
+				<IMG onclick="selSetting(this, &#39;c.lineWidth=2;&#39;)" src="./img/airbrush_m.gif" width="19" height="19" style="float:left;"><BR>
+				<IMG onclick="selSetting(this, &#39;c.lineWidth=3;&#39;)" src="./img/airbrush_l.gif" width="24" height="24" style="clear:left;margin-top:6px;margin-left:7px;">
+			</DIV>
+
+		</DIV>
+		<DIV id="colorbar">
+			<DIV id="currcol">
+				<DIV id="currcolback"></DIV>
+				<DIV id="currcolfore"></DIV>
+			</DIV>
+			<UL id="colors">
+				<LI style="background-color:#000" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#FFF" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#999" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#CCC" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#900" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#F00" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#990" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#FF0" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#090" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#0F0" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#099" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#0FF" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#009" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#00F" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#909" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#F0F" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#994" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#FF9" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#044" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#0F9" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#09F" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#9FF" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#049" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#99F" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#90F" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#F09" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#940" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+				<LI style="background-color:#F94" onmousedown="selCol(this, event)" oncontextmenu="selCol(this, event, 1)"><DIV></DIV></LI>
+			</UL>
+		</DIV>
+
+	</DIV>
+		
+	
+</DIV>
+
+
+<DIV id="overlaybg"></DIV>
+<DIV id="overlay">
+  <H1>Sorry, you're using an incompatible browser.</H1>
+  <P><BIG>Your browser doesn't support the WHATWG &lt;canvas&gt; element.<BR>
+    To try out CanvasPaint, consider <A href="http://getfirefox.com/">downloading 
+Mozilla Firefox</A> – it's free and secure.</BIG></P>
+
+  <P>
+    <A href="http://canvaspaint.org/#" onclick="overlay_hide()">close</A>
+  </P>
+</DIV>
+
+
+
+</BODY></HTML>
